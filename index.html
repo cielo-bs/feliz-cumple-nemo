@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Feliz Cumpleaños Nemo 🎈</title>
+<meta name="description" content="Una sorpresa de cumpleaños para Nemo">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.85em%22 font-size=%2290%22>🎈</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- fondo decorativo -->
+  <div class="bg-gradient" aria-hidden="true"></div>
+  <div id="sparkles" class="sparkles" aria-hidden="true"></div>
+
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+  <main id="app">
+
+    <!-- PANTALLA 1: INTRO -->
+    <section id="intro-screen" class="screen is-active">
+      <div class="card">
+        <p class="eyebrow">✨ para vos ✨</p>
+        <h1 class="script-title" id="intro-title">Feliz Cumpleaños,<br>Nemo</h1>
+        <p class="subtitle" id="intro-subtitle">Explotá todos los globos para descubrir tu sorpresa ✨</p>
+        <button id="start-btn" class="btn">Empezar 🎈</button>
+      </div>
+    </section>
+
+    <!-- PANTALLA 2: JUEGO -->
+    <section id="game-screen" class="screen">
+      <div class="counter-bar">
+        <span id="counter-text">0 / 12 globos</span>
+        <div class="progress-track">
+          <div id="progress-fill" class="progress-fill"></div>
+        </div>
+      </div>
+      <div id="balloon-field" class="balloon-field"></div>
+    </section>
+
+    <!-- PANTALLA 3: REGALO / MENSAJE -->
+    <section id="reveal-screen" class="screen">
+      <div class="card">
+        <p class="eyebrow">🎉 lo lograste 🎉</p>
+        <h2 class="script-title" id="final-message">¡Feliz cumple! Te amamos 💕</h2>
+        <p class="final-sub" id="final-submessage">Tu regalo está en MP 🎁</p>
+        <button id="replay-btn" class="btn btn-ghost">Volver a jugar 🎈</button>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
