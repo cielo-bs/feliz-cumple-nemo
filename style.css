@@ -346,23 +346,33 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  background:rgba(255,255,255,.9);
+  background:rgba(255,255,255,.92);
   backdrop-filter:blur(8px);
   -webkit-backdrop-filter:blur(8px);
-  padding:12px;
+  padding:20px;
   border-radius:50%;
-  box-shadow:0 10px 25px -10px rgba(120,90,140,.4);
-  animation:surprisePop 2.9s ease forwards;
+  box-shadow:0 16px 40px -12px rgba(120,90,140,.5);
+  animation:surprisePop 3.6s cubic-bezier(.2,1.6,.3,1) forwards;
+}
+
+.surprise-pop::before{
+  content:"";
+  position:absolute;
+  inset:-18px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 70%);
+  animation:surpriseGlow 1s ease-out forwards;
+  z-index:-1;
 }
 
 .surprise-emoji{
-  font-size:2rem;
+  font-size:3.4rem;
   line-height:1;
 }
 
 .surprise-icon{
-  width:46px;
-  height:46px;
+  width:76px;
+  height:76px;
   display:block;
 }
 
@@ -373,11 +383,16 @@ body{
 }
 
 @keyframes surprisePop{
-  0%{ transform:translate(-50%,-55%) scale(.5); opacity:0; }
-  10%{ transform:translate(-50%,-95%) scale(1.1); opacity:1; }
-  20%{ transform:translate(-50%,-100%) scale(1); opacity:1; }
-  78%{ transform:translate(-50%,-105%) scale(1); opacity:1; }
-  100%{ transform:translate(-50%,-140%) scale(.85); opacity:0; }
+  0%{ transform:translate(-50%,-50%) scale(.3); opacity:0; }
+  12%{ transform:translate(-50%,-100%) scale(1.35); opacity:1; }
+  24%{ transform:translate(-50%,-100%) scale(1.1); opacity:1; }
+  85%{ transform:translate(-50%,-100%) scale(1.1); opacity:1; }
+  100%{ transform:translate(-50%,-130%) scale(.9); opacity:0; }
+}
+
+@keyframes surpriseGlow{
+  0%{ transform:scale(.4); opacity:.9; }
+  100%{ transform:scale(1.9); opacity:0; }
 }
 
 /* ---------- responsive tweaks ---------- */
