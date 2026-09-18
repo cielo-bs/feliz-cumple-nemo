@@ -15,11 +15,11 @@ const CONFIG = {
   // mini-sorpresa que aparece cada vez que se revienta un globo
   // (se reparten sorteadas entre los globos: uno por elemento, sin repetir).
   // cada una tiene "emoji" (un emoji posta) o "svg" (un dibujito armado a mano
-  // para lo que no existe como emoji). "text" es solo para identificarlos
-  // acá en el código, no se muestra en la página.
+  // para lo que no existe como emoji), más "text": una etiqueta cortita (una
+  // o dos palabras) que aparece debajo del dibujo al reventar el globo.
   // Si agregás más elementos que globos, aumentá balloonCount para que entren todos.
   balloonSurprises: [
-    { emoji: "🐠", text: "el pez payaso, obvio" },
+    { emoji: "🐠", text: "el pez payaso" },
     { emoji: "👶", text: "la beba" },
     {
       svg: `<svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="17" fill="#fff" stroke="#e3d6f0" stroke-width="1.5"/><path d="M30 13 a6 6 0 0 1 6 6 v3 h-12 v-3 a6 6 0 0 1 6 -6 Z" fill="#f7b8d0"/><circle cx="24" cy="30" r="2" fill="#5b4a63"/><circle cx="36" cy="30" r="2" fill="#5b4a63"/><path d="M25 38 Q30 42 35 38" stroke="#5b4a63" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`,
@@ -28,7 +28,7 @@ const CONFIG = {
     { emoji: "📐", text: "la arquitecta" },
     {
       svg: `<svg viewBox="0 0 60 60"><path d="M12 30 Q10 10 30 9 Q50 10 48 29 Q47 16 39 18 Q43 12 34 13 Q38 9 29 10 Q21 6 22 13 Q14 11 16 18 Q11 17 12 30 Z" fill="#a9714a"/><circle cx="30" cy="34" r="16" fill="#ffe0c2"/><path d="M14 30 Q12 12 30 11 Q48 12 46 30 Q45 19 38 21 Q42 15 35 16 Q22 8 24 15 Q16 13 18 19 Q12 19 14 30 Z" fill="#a9714a"/><circle cx="24" cy="35" r="2" fill="#5b4a63"/><circle cx="36" cy="35" r="2" fill="#5b4a63"/><path d="M24 43 Q30 47 36 43" stroke="#5b4a63" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`,
-      text: "leito"
+      text: "Leito"
     },
     {
       svg: `<svg viewBox="0 0 60 60"><polygon points="14,14 25,27 9,28" fill="#fff" stroke="#e3d6f0" stroke-width="1.5"/><polygon points="46,14 35,27 51,28" fill="#fff" stroke="#e3d6f0" stroke-width="1.5"/><circle cx="30" cy="34" r="16" fill="#fff" stroke="#e3d6f0" stroke-width="1.5"/><circle cx="24" cy="32" r="2" fill="#5b4a63"/><circle cx="36" cy="32" r="2" fill="#5b4a63"/><ellipse cx="30" cy="40" rx="3" ry="2" fill="#5b4a63"/><path d="M30 42 Q30 46 26 46 M30 42 Q30 46 34 46" stroke="#5b4a63" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>`,
@@ -310,10 +310,14 @@ function showSurprise(x, y, surprise) {
   el.style.left = `${x}px`;
   el.style.top = `${y}px`;
 
-  // solo el dibujito/emoji, sin texto debajo
-  el.innerHTML = surprise.svg
+  const iconHTML = surprise.svg
     ? `<span class="surprise-icon">${surprise.svg}</span>`
     : `<span class="surprise-emoji">${surprise.emoji}</span>`;
+
+  el.innerHTML = `
+    ${iconHTML}
+    <span class="surprise-text">${surprise.text}</span>
+  `;
 
   document.body.appendChild(el);
   setTimeout(() => el.remove(), 3600);
