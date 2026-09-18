@@ -15,8 +15,9 @@ const CONFIG = {
   // mini-sorpresa que aparece cada vez que se revienta un globo
   // (se reparten sorteadas entre los globos: uno por elemento, sin repetir).
   // cada una tiene "emoji" (un emoji posta) o "svg" (un dibujito armado a mano
-  // para lo que no existe como emoji). Si agregás más elementos que globos,
-  // aumentá balloonCount para que entren todos.
+  // para lo que no existe como emoji). "text" es solo para identificarlos
+  // acá en el código, no se muestra en la página.
+  // Si agregás más elementos que globos, aumentá balloonCount para que entren todos.
   balloonSurprises: [
     { emoji: "🐠", text: "el pez payaso, obvio" },
     { emoji: "👶", text: "la beba" },
@@ -169,7 +170,7 @@ function buildBalloons() {
     const maxY = Math.max(0, fieldHeight - size * 1.2);
 
     const angle = Math.random() * Math.PI * 2;
-    const speed = 58 + Math.random() * 32; // px/segundo (más rápido = más difícil de agarrar)
+    const speed = 110 + Math.random() * 60; // px/segundo (rápido a propósito, cuesta agarrarlos)
 
     const obj = {
       el: balloon,
@@ -239,8 +240,8 @@ function animationLoop(now) {
 
 // cada globo reventado acelera un poquito a los que quedan (más desafío)
 function rampSpeeds() {
-  const rampFactor = 1.09;
-  const maxSpeed = 190;
+  const rampFactor = 1.12;
+  const maxSpeed = 280;
   activeBalloons.forEach((b) => {
     if (b.popped) return;
     b.vx *= rampFactor;
@@ -309,16 +310,13 @@ function showSurprise(x, y, surprise) {
   el.style.left = `${x}px`;
   el.style.top = `${y}px`;
 
-  const iconHTML = surprise.svg
+  // solo el dibujito/emoji, sin texto debajo
+  el.innerHTML = surprise.svg
     ? `<span class="surprise-icon">${surprise.svg}</span>`
     : `<span class="surprise-emoji">${surprise.emoji}</span>`;
 
-  el.innerHTML = `
-    ${iconHTML}
-    <span class="surprise-text">${surprise.text}</span>
-  `;
   document.body.appendChild(el);
-  setTimeout(() => el.remove(), 1350);
+  setTimeout(() => el.remove(), 2900);
 }
 
 /* ---------------------------------------------------------
