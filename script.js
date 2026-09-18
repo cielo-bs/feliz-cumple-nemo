@@ -28,7 +28,7 @@ const CONFIG = {
     { emoji: "📐", text: "la arquitecta" },
     {
       svg: `<svg viewBox="0 0 60 60"><path d="M12 30 Q10 10 30 9 Q50 10 48 29 Q47 16 39 18 Q43 12 34 13 Q38 9 29 10 Q21 6 22 13 Q14 11 16 18 Q11 17 12 30 Z" fill="#a9714a"/><circle cx="30" cy="34" r="16" fill="#ffe0c2"/><path d="M14 30 Q12 12 30 11 Q48 12 46 30 Q45 19 38 21 Q42 15 35 16 Q22 8 24 15 Q16 13 18 19 Q12 19 14 30 Z" fill="#a9714a"/><circle cx="24" cy="35" r="2" fill="#5b4a63"/><circle cx="36" cy="35" r="2" fill="#5b4a63"/><path d="M24 43 Q30 47 36 43" stroke="#5b4a63" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`,
-      text: "el chico del pelo ondulado"
+      text: "leito"
     },
     {
       svg: `<svg viewBox="0 0 60 60"><polygon points="14,14 25,27 9,28" fill="#fff" stroke="#e3d6f0" stroke-width="1.5"/><polygon points="46,14 35,27 51,28" fill="#fff" stroke="#e3d6f0" stroke-width="1.5"/><circle cx="30" cy="34" r="16" fill="#fff" stroke="#e3d6f0" stroke-width="1.5"/><circle cx="24" cy="32" r="2" fill="#5b4a63"/><circle cx="36" cy="32" r="2" fill="#5b4a63"/><ellipse cx="30" cy="40" rx="3" ry="2" fill="#5b4a63"/><path d="M30 42 Q30 46 26 46 M30 42 Q30 46 34 46" stroke="#5b4a63" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>`,
@@ -170,7 +170,7 @@ function buildBalloons() {
     const maxY = Math.max(0, fieldHeight - size * 1.2);
 
     const angle = Math.random() * Math.PI * 2;
-    const speed = 110 + Math.random() * 60; // px/segundo (rápido a propósito, cuesta agarrarlos)
+    const speed = 230 + Math.random() * 90; // px/segundo (rápido, RÁPIDO — a propósito)
 
     const obj = {
       el: balloon,
@@ -240,8 +240,8 @@ function animationLoop(now) {
 
 // cada globo reventado acelera un poquito a los que quedan (más desafío)
 function rampSpeeds() {
-  const rampFactor = 1.12;
-  const maxSpeed = 280;
+  const rampFactor = 1.15;
+  const maxSpeed = 450;
   activeBalloons.forEach((b) => {
     if (b.popped) return;
     b.vx *= rampFactor;
@@ -316,7 +316,7 @@ function showSurprise(x, y, surprise) {
     : `<span class="surprise-emoji">${surprise.emoji}</span>`;
 
   document.body.appendChild(el);
-  setTimeout(() => el.remove(), 2900);
+  setTimeout(() => el.remove(), 3600);
 }
 
 /* ---------------------------------------------------------
