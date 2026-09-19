@@ -3,59 +3,91 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Feliz Cumpleaños Nemo 🎈</title>
-<meta name="description" content="Una sorpresa de cumpleaños para Nemo">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.85em%22 font-size=%2290%22>🎈</text></svg>">
+<title>Las Eras de Nemo 🔮</title>
+<meta name="description" content="Una tirada de tarot para Nemo">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.85em%22 font-size=%2290%22>🔮</text></svg>">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- fondo decorativo -->
-  <div class="bg-gradient" aria-hidden="true"></div>
-  <div id="sparkles" class="sparkles" aria-hidden="true"></div>
-
+  <!-- fondo místico -->
+  <div class="bg-mystic" aria-hidden="true"></div>
+  <div id="stars" class="stars" aria-hidden="true"></div>
   <canvas id="confetti-canvas" aria-hidden="true"></canvas>
 
   <main id="app">
 
-    <!-- PANTALLA 1: INTRO -->
-    <section id="intro-screen" class="screen is-active">
-      <div class="card">
-        <p class="eyebrow">✨ para vos ✨</p>
-        <h1 class="script-title" id="intro-title">Feliz Cumpleaños,<br>Nemo</h1>
-        <p class="subtitle" id="intro-subtitle">Explotá todos los globos para descubrir tu sorpresa ✨</p>
-        <button id="start-btn" class="btn">Empezar 🎈</button>
+    <!-- PANTALLA 1: LA BRUJA TE RECIBE -->
+    <section id="witch-screen" class="screen is-active">
+      <h1 class="deck-title">🔮 Las Eras de Nemo 🔮</h1>
+
+      <div id="hands-stage" class="hands-stage">
+        <div class="witch-hand hand-left">
+          <div class="palm"></div>
+          <div class="finger f1"><span class="nail"></span></div>
+          <div class="finger f2"><span class="nail"></span><span class="ring"></span></div>
+          <div class="finger f3"><span class="nail"></span></div>
+          <div class="finger f4"><span class="nail"></span></div>
+          <div class="thumb"><span class="nail"></span></div>
+        </div>
+
+        <div class="card-fan">
+          <div class="mini-card mc1"></div>
+          <div class="mini-card mc2"></div>
+          <div class="mini-card mc3"></div>
+        </div>
+
+        <div class="witch-hand hand-right">
+          <div class="palm"></div>
+          <div class="finger f1"><span class="nail"></span></div>
+          <div class="finger f2"><span class="nail"></span><span class="ring"></span></div>
+          <div class="finger f3"><span class="nail"></span></div>
+          <div class="finger f4"><span class="nail"></span></div>
+          <div class="thumb"><span class="nail"></span></div>
+        </div>
+      </div>
+
+      <div id="witch-dialogue" class="dialogue-box">
+        <p id="witch-text" class="dialogue-text"></p>
+        <p class="tap-hint" id="witch-hint">tocá para continuar ▾</p>
       </div>
     </section>
 
-    <!-- PANTALLA 2: JUEGO -->
-    <section id="game-screen" class="screen">
-      <div class="counter-bar">
-        <div class="stats-row">
-          <span id="counter-text">0 / 9 globos</span>
-          <span id="timer-text">⏱ 0:00</span>
+    <!-- PANTALLA 2: LA TIRADA -->
+    <section id="reading-screen" class="screen">
+      <div id="progress-dots" class="progress-dots"></div>
+
+      <div id="card-stage" class="card-stage">
+        <div id="tarot-card" class="tarot-card">
+          <div class="tarot-card-inner">
+            <div class="tarot-face tarot-back"></div>
+            <div class="tarot-face tarot-front">
+              <img id="tarot-front-img" src="" alt="">
+            </div>
+          </div>
         </div>
-        <div class="progress-track">
-          <div id="progress-fill" class="progress-fill"></div>
-        </div>
+        <p class="tap-hint" id="card-hint">tocá la carta ▾</p>
       </div>
-      <div id="balloon-field" class="balloon-field"></div>
+
+      <div id="reading-dialogue" class="dialogue-box is-hidden">
+        <p id="reading-text" class="dialogue-text"></p>
+        <p class="tap-hint" id="reading-hint">tocá para continuar ▾</p>
+      </div>
     </section>
 
-    <!-- PANTALLA 3: REGALO / MENSAJE -->
-    <section id="reveal-screen" class="screen">
-      <div class="card">
-        <p class="eyebrow">🎉 lo lograste 🎉</p>
-        <h2 class="script-title" id="final-message">¡Feliz cumple! Te amamos 💕</h2>
+    <!-- PANTALLA 3: MENSAJE FINAL -->
+    <section id="final-screen" class="screen">
+      <div class="card final-card">
+        <p class="eyebrow">🔮 fin de la tirada 🔮</p>
+        <h2 class="script-title" id="final-message">¡Feliz cumpleaños! Veo una vida brillante, con muchas eras más ✨</h2>
         <p class="final-sub" id="final-submessage">Tu regalo está en MP 🎁</p>
         <p class="final-joke" id="final-joke">(ahre que siempre regalaban lo mismo 😂)</p>
-        <p class="time-badge" id="time-result"></p>
-        <button id="replay-btn" class="btn btn-ghost">Volver a jugar 🎈</button>
+        <button id="replay-btn" class="btn btn-ghost">Leer de nuevo 🔮</button>
       </div>
     </section>
 
