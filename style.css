@@ -1,23 +1,20 @@
 /* ============================================
-   Feliz Cumpleaños — paleta y variables
-   Cambiá estos colores si querés otro "mood" 🎨
+   Las Eras de Nemo — paleta mística
    ============================================ */
 :root{
-  --lavender:#d9c9f2;
-  --lavender-deep:#b79ee0;
-  --peach:#ffd9c2;
-  --peach-deep:#ffb199;
-  --mint:#c3f0e1;
-  --gold:#f6cf72;
-  --cream:#fffaf3;
-  --ink:#5b4a63;
-  --ink-soft:#8a7791;
-  --white:#ffffff;
+  --ink:#f3e9d8;
+  --ink-soft:#cbb9d8;
+  --gold:#e0b559;
+  --gold-bright:#f6d789;
+  --deep:#1a1030;
+  --deep-2:#2c1a3e;
+  --wine:#3a1230;
+  --card-bg:rgba(28, 16, 46, .55);
 
-  --font-script:'Dancing Script', cursive;
-  --font-body:'Quicksand', sans-serif;
+  --font-title:'Cinzel', serif;
+  --font-body:'Cormorant Garamond', serif;
 
-  --shadow-soft:0 20px 45px -20px rgba(120, 90, 140, .35);
+  --shadow-soft:0 20px 45px -20px rgba(0,0,0,.6);
 }
 
 *{ box-sizing:border-box; }
@@ -38,30 +35,21 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
+  background:var(--deep);
 }
 
-/* ---------- fondo con gradiente animado ---------- */
-.bg-gradient{
+/* ---------- fondo místico ---------- */
+.bg-mystic{
   position:fixed;
   inset:0;
   z-index:-2;
-  background:linear-gradient(120deg,
-    var(--lavender) 0%,
-    var(--peach) 35%,
-    var(--mint) 65%,
-    var(--lavender) 100%);
-  background-size:300% 300%;
-  animation:gradientShift 18s ease-in-out infinite;
+  background:
+    radial-gradient(ellipse at 50% 20%, var(--wine) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 100%, var(--deep-2) 0%, transparent 60%),
+    linear-gradient(180deg, var(--deep) 0%, #0d0818 100%);
 }
 
-@keyframes gradientShift{
-  0%{ background-position:0% 50%; }
-  50%{ background-position:100% 50%; }
-  100%{ background-position:0% 50%; }
-}
-
-/* ---------- brillitos flotantes de fondo ---------- */
-.sparkles{
+.stars{
   position:fixed;
   inset:0;
   z-index:-1;
@@ -69,18 +57,19 @@ body{
   overflow:hidden;
 }
 
-.sparkle{
+.star{
   position:absolute;
   opacity:.7;
-  animation:sparkleFloat linear infinite;
-  filter:drop-shadow(0 0 6px rgba(255,255,255,.6));
+  animation:starTwinkle linear infinite;
+  filter:drop-shadow(0 0 4px rgba(230,190,120,.5));
 }
 
-@keyframes sparkleFloat{
-  0%{ transform:translateY(10vh) scale(.8) rotate(0deg); opacity:0; }
-  10%{ opacity:.8; }
-  90%{ opacity:.6; }
-  100%{ transform:translateY(-110vh) scale(1.1) rotate(180deg); opacity:0; }
+@keyframes starTwinkle{
+  0%{ transform:translateY(10vh) scale(.7); opacity:0; }
+  10%{ opacity:.9; }
+  50%{ opacity:.4; }
+  90%{ opacity:.8; }
+  100%{ transform:translateY(-105vh) scale(1.1); opacity:0; }
 }
 
 /* ---------- canvas de confeti ---------- */
@@ -93,7 +82,7 @@ body{
   height:100%;
 }
 
-/* ---------- layout general de pantallas ---------- */
+/* ---------- layout general ---------- */
 #app{
   width:100%;
   min-height:100vh;
@@ -111,6 +100,7 @@ body{
   opacity:0;
   pointer-events:none;
   transition:opacity .6s ease;
+  cursor:pointer;
 }
 
 .screen.is-active{
@@ -119,19 +109,30 @@ body{
   position:relative;
 }
 
-/* ---------- tarjeta "glass" ---------- */
+.deck-title{
+  font-family:var(--font-title);
+  font-size:clamp(1.4rem, 5vw, 1.9rem);
+  color:var(--gold-bright);
+  text-align:center;
+  letter-spacing:.03em;
+  margin:0 0 8px;
+  text-shadow:0 0 18px rgba(224,181,89,.5);
+}
+
+/* ---------- tarjeta "glass" (pantalla final) ---------- */
 .card{
-  background:rgba(255,255,255,.6);
+  background:var(--card-bg);
   backdrop-filter:blur(18px);
   -webkit-backdrop-filter:blur(18px);
-  border:1px solid rgba(255,255,255,.8);
-  border-radius:32px;
+  border:1px solid rgba(224,181,89,.35);
+  border-radius:24px;
   padding:clamp(28px, 6vw, 56px);
   max-width:520px;
   width:100%;
   text-align:center;
   box-shadow:var(--shadow-soft);
   animation:cardPop .7s cubic-bezier(.2,1.4,.4,1) both;
+  cursor:default;
 }
 
 @keyframes cardPop{
@@ -141,40 +142,34 @@ body{
 
 .eyebrow{
   margin:0 0 6px;
+  font-family:var(--font-title);
   font-weight:600;
   letter-spacing:.08em;
   text-transform:uppercase;
   font-size:.75rem;
-  color:var(--lavender-deep);
+  color:var(--gold);
 }
 
 .script-title{
-  font-family:var(--font-script);
+  font-family:var(--font-title);
   font-weight:700;
   color:var(--ink);
-  font-size:clamp(2.4rem, 8vw, 3.6rem);
-  line-height:1.15;
-  margin:0 0 12px;
-}
-
-.subtitle{
-  margin:0 0 28px;
-  font-size:1.05rem;
-  color:var(--ink-soft);
-  line-height:1.5;
+  font-size:clamp(1.6rem, 6vw, 2.3rem);
+  line-height:1.3;
+  margin:0 0 14px;
 }
 
 .final-sub{
   margin:0 0 4px;
-  font-size:1.3rem;
+  font-size:1.4rem;
   font-weight:600;
-  color:var(--peach-deep);
+  color:var(--gold-bright);
 }
 
 .final-joke{
-  margin:0 0 20px;
+  margin:0 0 24px;
   font-style:italic;
-  font-size:.85rem;
+  font-size:1rem;
   color:var(--ink-soft);
   opacity:0;
   animation:fadeInJoke .6s ease .9s forwards;
@@ -184,219 +179,295 @@ body{
   to{ opacity:1; }
 }
 
-.time-badge{
-  display:inline-block;
-  font-size:.85rem;
-  font-weight:700;
-  color:var(--peach-deep);
-  background:rgba(255,255,255,.6);
-  padding:6px 16px;
-  border-radius:999px;
-  margin-bottom:22px;
-}
-
-.time-badge:empty{
-  display:none;
-}
-
 /* ---------- botones ---------- */
 .btn{
-  font-family:var(--font-body);
-  font-weight:700;
-  font-size:1.05rem;
-  color:var(--white);
-  background:linear-gradient(135deg, var(--lavender-deep), var(--peach-deep));
+  font-family:var(--font-title);
+  font-weight:600;
+  font-size:1rem;
+  color:var(--deep);
+  background:linear-gradient(135deg, var(--gold-bright), var(--gold));
   border:none;
-  padding:16px 36px;
+  padding:14px 32px;
   border-radius:999px;
   cursor:pointer;
-  box-shadow:0 12px 25px -10px rgba(183,158,224,.7);
+  box-shadow:0 12px 25px -10px rgba(224,181,89,.5);
   transition:transform .2s ease, box-shadow .2s ease;
 }
 
 .btn:hover{
   transform:translateY(-2px) scale(1.03);
-  box-shadow:0 16px 30px -10px rgba(183,158,224,.8);
-}
-
-.btn:active{
-  transform:translateY(0) scale(.98);
 }
 
 .btn-ghost{
   background:transparent;
-  color:var(--lavender-deep);
-  border:2px solid var(--lavender-deep);
+  color:var(--gold-bright);
+  border:2px solid var(--gold);
   box-shadow:none;
 }
 
-/* ---------- pantalla de juego ---------- */
-#game-screen{
-  justify-content:flex-start;
-  align-items:stretch;
-  padding-top:max(20px, env(safe-area-inset-top));
-  min-height:100vh;
-}
-
-.counter-bar{
-  width:100%;
-  max-width:520px;
-  margin:0 auto 18px;
-  text-align:center;
-}
-
-.stats-row{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-bottom:8px;
-}
-
-#counter-text,
-#timer-text{
-  display:inline-block;
-  font-weight:700;
-  background:rgba(255,255,255,.7);
-  backdrop-filter:blur(10px);
-  padding:6px 16px;
-  border-radius:999px;
-  font-size:.9rem;
-  color:var(--ink);
-}
-
-#timer-text{
-  color:var(--lavender-deep);
-  font-variant-numeric:tabular-nums;
-}
-
-.progress-track{
-  width:100%;
-  height:10px;
-  background:rgba(255,255,255,.55);
-  border-radius:999px;
-  overflow:hidden;
-}
-
-.progress-fill{
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg, var(--peach-deep), var(--gold));
-  border-radius:999px;
-  transition:width .4s ease;
-}
-
-/* ---------- campo de globos (se mueven, hay que cazarlos) ---------- */
-.balloon-field{
-  width:100%;
-  max-width:640px;
-  margin:0 auto;
-  flex:1;
-  min-height:320px;
+/* ---------- manos barajando (intro) ---------- */
+.hands-stage{
   position:relative;
-  overflow:hidden;
+  width:100%;
+  max-width:380px;
+  height:180px;
+  margin:6px auto 10px;
 }
 
-.balloon{
-  --size:clamp(58px, 15vw, 84px);
-  width:var(--size);
-  height:calc(var(--size) * 1.2);
+.witch-hand{
+  position:absolute;
+  bottom:-30px;
+  width:130px;
+  height:170px;
+  animation:handSway 3.4s ease-in-out infinite;
+}
+
+.hand-left{ left:4%; transform-origin:bottom left; }
+.hand-right{ right:4%; transform:scaleX(-1); transform-origin:bottom right; animation-delay:.6s; }
+
+@keyframes handSway{
+  0%, 100%{ transform:translateY(0) rotate(-2deg); }
+  50%{ transform:translateY(-8px) rotate(2deg); }
+}
+.hand-right{ animation-name:handSwayR; }
+@keyframes handSwayR{
+  0%, 100%{ transform:scaleX(-1) translateY(0) rotate(-2deg); }
+  50%{ transform:scaleX(-1) translateY(-8px) rotate(2deg); }
+}
+
+.witch-hand .palm{
+  position:absolute;
+  bottom:0;
+  left:16px;
+  width:88px;
+  height:100px;
+  background:linear-gradient(160deg, #d9a679, #b87f56);
+  border-radius:52% 48% 42% 42% / 62% 62% 38% 38%;
+  box-shadow:inset -8px -8px 16px rgba(0,0,0,.15);
+}
+
+.witch-hand .finger{
+  position:absolute;
+  bottom:78px;
+  width:20px;
+  height:64px;
+  background:linear-gradient(160deg, #d9a679, #b87f56);
+  border-radius:10px;
+  transform-origin:bottom center;
+}
+
+.witch-hand .thumb{
+  position:absolute;
+  bottom:24px;
+  left:-6px;
+  width:22px;
+  height:48px;
+  background:linear-gradient(160deg, #d9a679, #b87f56);
+  border-radius:10px;
+  transform:rotate(-45deg);
+  transform-origin:bottom center;
+}
+
+.witch-hand .f1{ left:10px; transform:rotate(-16deg); height:58px; }
+.witch-hand .f2{ left:34px; transform:rotate(-5deg); }
+.witch-hand .f3{ left:58px; transform:rotate(6deg); }
+.witch-hand .f4{ left:82px; transform:rotate(17deg); height:50px; }
+
+.witch-hand .nail{
+  position:absolute;
+  top:-6px;
+  left:3px;
+  width:14px;
+  height:16px;
+  background:linear-gradient(160deg, #6e1f3a, #4a1226);
+  border-radius:50% 50% 60% 60% / 60% 60% 40% 40%;
+  box-shadow:0 0 4px rgba(0,0,0,.4);
+}
+
+.witch-hand .ring{
+  position:absolute;
+  bottom:14px;
+  left:2px;
+  width:16px;
+  height:8px;
+  border:2px solid var(--gold);
+  border-radius:50%;
+  box-shadow:0 0 6px rgba(224,181,89,.6);
+}
+
+.card-fan{
+  position:absolute;
+  bottom:36px;
+  left:50%;
+  transform:translateX(-50%);
+  width:80px;
+  height:100px;
+}
+
+.mini-card{
   position:absolute;
   top:0;
-  left:0;
-  cursor:pointer;
-  -webkit-tap-highlight-color:transparent;
-  touch-action:manipulation;
-  will-change:transform;
+  left:50%;
+  width:56px;
+  height:82px;
+  background-image:url('cartas/dorso.jpg');
+  background-size:cover;
+  background-position:center;
+  border-radius:6px;
+  border:1px solid rgba(224,181,89,.6);
+  box-shadow:0 8px 16px -6px rgba(0,0,0,.6);
+  animation:cardShuffle 2.6s ease-in-out infinite;
 }
 
-.balloon.popped{
-  pointer-events:none;
+.mc1{ animation-delay:0s; }
+.mc2{ animation-delay:.3s; }
+.mc3{ animation-delay:.6s; }
+
+@keyframes cardShuffle{
+  0%, 100%{ transform:translateX(-50%) rotate(-6deg) translateY(0); }
+  25%{ transform:translateX(-65%) rotate(-10deg) translateY(-4px); }
+  50%{ transform:translateX(-50%) rotate(0deg) translateY(-8px); }
+  75%{ transform:translateX(-35%) rotate(10deg) translateY(-4px); }
 }
 
-.balloon-inner{
+/* ---------- caja de diálogo de la bruja ---------- */
+.dialogue-box{
   width:100%;
-  height:100%;
-  transform-origin:center;
-}
-
-.balloon-inner svg{
-  width:100%;
-  height:100%;
-  overflow:visible;
-  filter:drop-shadow(0 10px 14px rgba(90,60,90,.25));
-}
-
-.balloon-inner.popped{
-  animation:balloonPop .35s ease forwards;
-}
-
-@keyframes balloonPop{
-  0%{ transform:scale(1); opacity:1; }
-  50%{ transform:scale(1.35); opacity:.7; }
-  100%{ transform:scale(0); opacity:0; }
-}
-
-/* ---------- mini-sorpresa al reventar un globo ---------- */
-.surprise-pop{
-  position:fixed;
-  z-index:60;
-  pointer-events:none;
+  max-width:480px;
+  background:var(--card-bg);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(224,181,89,.3);
+  border-radius:20px;
+  padding:20px 24px;
+  text-align:center;
+  min-height:110px;
   display:flex;
-  align-items:center;
+  flex-direction:column;
   justify-content:center;
-  background:rgba(255,255,255,.92);
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
-  padding:20px;
+}
+
+.dialogue-box.is-hidden{
+  display:none;
+}
+
+.dialogue-text{
+  font-size:clamp(1.05rem, 3.4vw, 1.25rem);
+  font-style:italic;
+  line-height:1.55;
+  color:var(--ink);
+  margin:0 0 6px;
+  white-space:pre-line;
+}
+
+.tap-hint{
+  margin:0;
+  font-family:var(--font-title);
+  font-size:.7rem;
+  letter-spacing:.06em;
+  color:var(--gold);
+  opacity:0;
+  animation:hintPulse 1.6s ease-in-out infinite;
+}
+
+.tap-hint.is-visible{
+  opacity:.85;
+}
+
+@keyframes hintPulse{
+  0%, 100%{ opacity:.4; }
+  50%{ opacity:.9; }
+}
+
+/* ---------- pantalla de la tirada ---------- */
+#reading-screen{
+  justify-content:flex-start;
+  padding-top:max(20px, env(safe-area-inset-top));
+  min-height:100vh;
+  gap:14px;
+}
+
+.progress-dots{
+  display:flex;
+  gap:8px;
+  margin-bottom:6px;
+}
+
+.progress-dots .dot{
+  width:9px;
+  height:9px;
   border-radius:50%;
-  box-shadow:0 16px 40px -12px rgba(120,90,140,.5);
-  animation:surprisePop 3.6s cubic-bezier(.2,1.6,.3,1) forwards;
+  background:rgba(224,181,89,.25);
+  transition:background .3s ease, transform .3s ease;
 }
 
-.surprise-pop::before{
-  content:"";
-  position:absolute;
-  inset:-18px;
-  border-radius:50%;
-  background:radial-gradient(circle, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 70%);
-  animation:surpriseGlow 1s ease-out forwards;
-  z-index:-1;
+.progress-dots .dot.done{
+  background:var(--gold-bright);
+  box-shadow:0 0 8px rgba(224,181,89,.7);
 }
 
-.surprise-emoji{
-  font-size:3.4rem;
-  line-height:1;
+.progress-dots .dot.current{
+  transform:scale(1.3);
+  background:var(--gold);
 }
 
-.surprise-icon{
-  width:76px;
-  height:76px;
-  display:block;
+.card-stage{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  flex:1;
+  justify-content:center;
 }
 
-.surprise-icon svg{
+.tarot-card{
+  width:min(62vw, 260px);
+  aspect-ratio:2/3;
+  perspective:1200px;
+  cursor:pointer;
+}
+
+.tarot-card-inner{
+  position:relative;
   width:100%;
   height:100%;
+  transition:transform .7s cubic-bezier(.2,.8,.25,1);
+  transform-style:preserve-3d;
+}
+
+.tarot-card.flipped .tarot-card-inner{
+  transform:rotateY(180deg);
+}
+
+.tarot-face{
+  position:absolute;
+  inset:0;
+  backface-visibility:hidden;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 20px 40px -14px rgba(0,0,0,.7), 0 0 0 1px rgba(224,181,89,.4);
+}
+
+.tarot-back{
+  background-image:url('cartas/dorso.jpg');
+  background-size:cover;
+  background-position:center;
+}
+
+.tarot-front{
+  transform:rotateY(180deg);
+  background:#000;
+}
+
+.tarot-front img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
   display:block;
-}
-
-@keyframes surprisePop{
-  0%{ transform:translate(-50%,-50%) scale(.3); opacity:0; }
-  12%{ transform:translate(-50%,-100%) scale(1.35); opacity:1; }
-  24%{ transform:translate(-50%,-100%) scale(1.1); opacity:1; }
-  85%{ transform:translate(-50%,-100%) scale(1.1); opacity:1; }
-  100%{ transform:translate(-50%,-130%) scale(.9); opacity:0; }
-}
-
-@keyframes surpriseGlow{
-  0%{ transform:scale(.4); opacity:.9; }
-  100%{ transform:scale(1.9); opacity:0; }
 }
 
 /* ---------- responsive tweaks ---------- */
 @media (max-width:420px){
-  .card{ border-radius:24px; }
-  .balloon-field{ gap:6px; }
+  .card{ border-radius:20px; }
+  .hands-stage{ height:160px; }
 }
